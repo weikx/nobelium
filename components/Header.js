@@ -11,7 +11,7 @@ const NavBar = () => {
   const links = [
     { id: 0, name: locale.NAV.INDEX, to: BLOG.path || '/', show: true },
     { id: 1, name: locale.NAV.ABOUT, to: '/about', show: BLOG.showAbout },
-    { id: 2, name: locale.NAV.RSS, to: '/feed', show: true, external: true },
+    { id: 2, name: locale.NAV.RSS, to: '/feed', show: false, external: true },
     { id: 3, name: locale.NAV.SEARCH, to: '/search', show: true }
   ]
   return (
@@ -33,7 +33,7 @@ const NavBar = () => {
   )
 }
 
-export default function Header ({ navBarTitle, fullWidth }) {
+export default function Header({ navBarTitle, fullWidth }) {
   const BLOG = useConfig()
   const { dark } = useTheme()
 
@@ -72,7 +72,7 @@ export default function Header ({ navBarTitle, fullWidth }) {
 
   const titleRef = useRef(/** @type {HTMLParagraphElement} */ undefined)
 
-  function handleClickHeader (/** @type {MouseEvent} */ ev) {
+  function handleClickHeader(/** @type {MouseEvent} */ ev) {
     if (![navRef.current, titleRef.current].includes(ev.target)) return
 
     window.scrollTo({
@@ -85,9 +85,8 @@ export default function Header ({ navBarTitle, fullWidth }) {
     <>
       <div className="observer-element h-4 md:h-12" ref={sentinelRef}></div>
       <div
-        className={`sticky-nav group m-auto w-full h-6 flex flex-row justify-between items-center mb-2 md:mb-12 py-8 bg-opacity-60 ${
-          !fullWidth ? 'max-w-3xl px-4' : 'px-4 md:px-24'
-        }`}
+        className={`sticky-nav group m-auto w-full h-6 flex flex-row justify-between items-center mb-2 md:mb-12 py-8 bg-opacity-60 ${!fullWidth ? 'max-w-3xl px-4' : 'px-4 md:px-24'
+          }`}
         id="sticky-nav"
         ref={navRef}
         onClick={handleClickHeader}
@@ -125,7 +124,7 @@ export default function Header ({ navBarTitle, fullWidth }) {
   )
 }
 
-const HeaderName = forwardRef(function HeaderName ({ siteTitle, siteDescription, postTitle, onClick }, ref) {
+const HeaderName = forwardRef(function HeaderName({ siteTitle, siteDescription, postTitle, onClick }, ref) {
   return (
     <p
       ref={ref}
