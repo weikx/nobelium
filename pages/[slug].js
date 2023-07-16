@@ -10,7 +10,7 @@ import Container from '@/components/Container'
 import Post from '@/components/Post'
 import Comments from '@/components/Comments'
 
-export default function BlogPost ({ post, blockMap, emailHash }) {
+export default function BlogPost({ post, blockMap, emailHash }) {
   const router = useRouter()
   const BLOG = useConfig()
   const locale = useLocale()
@@ -46,7 +46,7 @@ export default function BlogPost ({ post, blockMap, emailHash }) {
       >
         <a>
           <button
-            onClick={() => router.push(BLOG.path || '/')}
+            onClick={() => router.back()}
             className="mt-2 cursor-pointer hover:text-black dark:hover:text-gray-100"
           >
             ← {locale.POST.BACK}
@@ -70,7 +70,7 @@ export default function BlogPost ({ post, blockMap, emailHash }) {
   )
 }
 
-export async function getStaticPaths () {
+export async function getStaticPaths() {
   const posts = await getAllPosts({ includePages: true })
   return {
     paths: posts.map(row => `${clientConfig.path}/${row.slug}`),
@@ -78,7 +78,7 @@ export async function getStaticPaths () {
   }
 }
 
-export async function getStaticProps ({ params: { slug } }) {
+export async function getStaticProps({ params: { slug } }) {
   const posts = await getAllPosts({ includePages: true })
   const post = posts.find(t => t.slug === slug)
 
